@@ -1,0 +1,8 @@
+# tienda/.htaccess
+RewriteEngine On
+
+# Redirigir assets directamente
+RewriteRule ^assets/(.*)$ public/assets/$1 [L]
+
+# Redirigir todo lo demás a public/
+RewriteRule ^(.*)$ public/$1 [L]

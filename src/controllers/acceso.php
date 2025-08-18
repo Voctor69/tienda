@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (password_verify($clave, $usuario['clave']) || $clave === $usuario['clave']) {
                 $_SESSION['usuario_id'] = $usuario['documento'];
                 $_SESSION['usuario_email'] = $email;
-                header("Location: procesar_pago.php");
+                header("Location: checkout.php");
                 exit();
             } else {
                 $error = "Contraseña incorrecta.";
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($stmt_insert->execute()) {
                         $_SESSION['usuario_id'] = $documento;
                         $_SESSION['usuario_email'] = $email;
-                        header("Location: procesar_pago.php");
+                        header("Location: checkout.php");
                         exit();
                     } else {
                         $error = "Error al registrar: " . mysqli_error($conexion);

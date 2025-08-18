@@ -1,6 +1,0 @@
-{
-    "require": {
-        "mercadopago/dx-php": "^2.6",
-        "epayco/epayco-php": "^1.8"
-    }
-}
