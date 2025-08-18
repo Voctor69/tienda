@@ -2,6 +2,9 @@
 session_start();
 $conexion = mysqli_connect("localhost", "root", "", "testbdpa", 3306);
 
+// cargar conexión a la base de datos
+require_once __DIR__ . '/src/models/conexion.php';
+
 if (!$conexion) {
     echo "No se conectó con la base de datos";
     exit;
@@ -174,7 +177,7 @@ if (isset($_GET['ajax_categoria']) && isset($_GET['categoria'])) {
         <div class="product-item">
           <figure>
             <a href="index.php" title="<?php echo htmlspecialchars($producto['nombre']); ?>"> 
-              <img src="<?php echo !empty($producto['imagen']) ? 'images/' . htmlspecialchars($producto['imagen']) : 'images/product-default.png'; ?>" 
+              <img src="<?php echo !empty($producto['imagen']) ? 'public/assets/images/' . htmlspecialchars($producto['imagen']) : 'public/assets/images/product-default.png'; ?>" 
                   alt="<?php echo htmlspecialchars($producto['nombre']); ?>" class="tab-image">
             </a>
           </figure>
@@ -240,10 +243,12 @@ if (isset($_GET['ajax_categoria']) && isset($_GET['categoria'])) {
     <meta name="keywords" content="">
     <meta name="description" content="">
 
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/vendor.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="public/assets/css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="public/assets/css/style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -384,7 +389,8 @@ function procesarPago() {
           <div class="col-sm-4 col-lg-2 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
             <div class="d-flex align-items-center my-3 my-sm-0">
               <a href="index.php">
-                <img src="images/CONGELADOSIA-removebg-preview.png" alt="logo" class="img-fluid">
+                
+                <img src="public/assets/images/CONGELADOSIA-removebg-preview.png" alt="logo" class="img-fluid">
               </a>
             </div>
             
@@ -465,7 +471,7 @@ function procesarPago() {
       </div>
     </header>
     
-    <section style="background-image: url('images/banner-1.jpg');background-repeat: no-repeat;background-size: cover;">
+    <section style="background-image: url('public/assets/images/banner-1.jpg');background-repeat: no-repeat;background-size: cover;">
       <div class="container-lg">
         <div class="row">
           <div class="col-lg-6 pt-5 mt-5">
@@ -568,23 +574,23 @@ function procesarPago() {
             <div class="category-carousel swiper">
               <div class="swiper-wrapper">
                 <a href="category.html" class="nav-link swiper-slide text-center">
-                  <img src="images/category-thumb-1.jpg" class="rounded-circle" alt="Category Thumbnail">
+                  <img src="public/assets/images/category-thumb-1.jpg" class="rounded-circle" alt="Category Thumbnail">
                   <h4 class="fs-6 mt-3 fw-normal category-title">Pulpas</h4>
                 </a>
                 <a href="category.html" class="nav-link swiper-slide text-center">
-                  <img src="images/category-thumb-2.jpg" class="rounded-circle" alt="Category Thumbnail">
+                  <img src="public/assets/images/category-thumb-2.jpg" class="rounded-circle" alt="Category Thumbnail">
                   <h4 class="fs-6 mt-3 fw-normal category-title">Frutas congeladas</h4>
                 </a>
                 <a href="category.html" class="nav-link swiper-slide text-center">
-                  <img src="images/category-thumb-3.jpg" class="rounded-circle" alt="Category Thumbnail">
+                  <img src="public/assets/images/category-thumb-3.jpg" class="rounded-circle" alt="Category Thumbnail">
                   <h4 class="fs-6 mt-3 fw-normal category-title">Vegetales congelados</h4>
                 </a>
                 <a href="category.html" class="nav-link swiper-slide text-center">
-                  <img src="images/category-thumb-4.jpg" class="rounded-circle" alt="Category Thumbnail">
+                  <img src="public/assets/images/category-thumb-4.jpg" class="rounded-circle" alt="Category Thumbnail">
                   <h4 class="fs-6 mt-3 fw-normal category-title">Congelados para freir</h4>
                 </a>
                 <a href="category.html" class="nav-link swiper-slide text-center">
-                  <img src="images/category-thumb-5.jpg" class="rounded-circle" alt="Category Thumbnail">
+                  <img src="public/assets/images/category-thumb-5.jpg" class="rounded-circle" alt="Category Thumbnail">
                   <h4 class="fs-6 mt-3 fw-normal category-title">Otros</h4>
                 </a>
 
@@ -615,7 +621,7 @@ function procesarPago() {
                  <div class="product-item">
                   <figure>
                     <a href="index.php" title="<?php echo htmlspecialchars($producto['nombre']); ?>"> 
-                      <img src="<?php echo !empty($producto['imagen']) ? 'images/' . htmlspecialchars($producto['imagen']) : 'images/product-default.png'; ?>" 
+                      <img src="<?php echo !empty($producto['imagen']) ? 'public/assets/images/' . htmlspecialchars($producto['imagen']) : 'images/product-default.png'; ?>" 
                           alt="<?php echo htmlspecialchars($producto['nombre']); ?>" class="tab-image">
                     </a>
                   </figure>
@@ -668,7 +674,7 @@ function procesarPago() {
 
             <div class="banner-blocks">
             
-              <div class="banner-ad d-flex align-items-center large bg-info block-1" style="background: url('images/banner-ad-1.jpg') no-repeat; background-size: cover;">
+              <div class="banner-ad d-flex align-items-center large bg-info block-1" style="background: url('public/assets/images/banner-ad-1.jpg') no-repeat; background-size: cover;">
                 <div class="banner-content p-5">
                   <div class="content-wrapper text-light">
                     <h3 class="banner-title text-light">Items on SALE</h3>
@@ -678,7 +684,7 @@ function procesarPago() {
                 </div>
               </div>
               
-              <div class="banner-ad bg-success-subtle block-2" style="background:url('images/banner-ad-2.jpg') no-repeat;background-size: cover">
+              <div class="banner-ad bg-success-subtle block-2" style="background:url('public/assets/images/banner-ad-2.jpg') no-repeat;background-size: cover">
                 <div class="banner-content align-items-center p-5">
                   <div class="content-wrapper text-light">
                     <h3 class="banner-title text-light">Combo offers</h3>
@@ -688,7 +694,7 @@ function procesarPago() {
                 </div>
               </div>
 
-              <div class="banner-ad bg-danger block-3" style="background:url('images/banner-ad-3.jpg') no-repeat;background-size: cover">
+              <div class="banner-ad bg-danger block-3" style="background:url('public/assets/images/banner-ad-3.jpg') no-repeat;background-size: cover">
                 <div class="banner-content align-items-center p-5">
                   <div class="content-wrapper text-light">
                     <h3 class="banner-title text-light">Discount Coupons</h3>
@@ -767,7 +773,7 @@ function procesarPago() {
 
           <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="footer-menu">
-              <img src="images/CONGELADOSIA-removebg-preview.png" width="240" height="70" alt="logo">
+              <img src="public/assets/images/CONGELADOSIA-removebg-preview.png" width="240" height="70" alt="logo">
               <div class="social-links mt-3">
                 <ul class="d-flex list-unstyled gap-2">
                   <li>
@@ -876,11 +882,11 @@ function procesarPago() {
         </div>
       </div>
     </div>
-    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="public/assets/js/jquery-1.11.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/script.js"></script>
+    <script src="public/assets/js/plugins.js"></script>
+    <script src="public/assets/js/script.js"></script>
     
     <script>
     // Añadir producto al carrito vía AJAX
