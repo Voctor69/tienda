@@ -1,17 +1,24 @@
 <?php
-session_start();
+// Iniciar sesión solo si no está ya activa
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 header('Content-Type: application/json');
 
-if (!isset($_SESSION['usuario_id'])) {
-    $_SESSION['redirect_after_login'] = 'tienda/src/controllers/checkout.php';
+// Verificar autenticación
+if (!isset($_SESSION['usuario_id']) || empty($_SESSION['usuario_id'])) {
+    $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
+    
     echo json_encode([
         "success" => false,
-        "error" => "auth_required"
+        "error" => "auth_required",
+        "message" => "Debe iniciar sesión para continuar"
     ]);
     exit;
 }
 
-// Llaves de Wompi - USANDO PRODUCCIÓN
+// CLAVES DE PRODUCCIÓN WOMPI - TUS CLAVES REALES
 define('WOMPI_PUBLIC_KEY', 'pub_prod_7XHbDz3WYra9t2e8FDjViDjKvmIY6dRZ');
 define('WOMPI_PRIVATE_KEY', 'prv_prod_Lai62Wtxj225XlXw0VJSC2KOTtfRI4KX');
 
@@ -19,7 +26,11 @@ $conexion = mysqli_connect("localhost", "root", "", "testbdpa", 3306);
 
 // Verificar conexión a la base de datos
 if (!$conexion) {
-    echo json_encode(['error' => 'Error de conexión a la base de datos: ' . mysqli_connect_error()]);
+    echo json_encode([
+        'success' => false,
+        'error' => 'database_error',
+        'message' => 'Error de conexión a la base de datos: ' . mysqli_connect_error()
+    ]);
     exit;
 }
 
@@ -42,7 +53,11 @@ $cart_query = "
 $cart_result = mysqli_query($conexion, $cart_query);
 
 if (!$cart_result) {
-    echo json_encode(['error' => 'Error en la consulta del carrito: ' . mysqli_error($conexion)]);
+    echo json_encode([
+        'success' => false,
+        'error' => 'cart_query_error',
+        'message' => 'Error en la consulta del carrito: ' . mysqli_error($conexion)
+    ]);
     exit;
 }
 
@@ -53,7 +68,9 @@ while ($row = mysqli_fetch_assoc($cart_result)) {
 // Si el carrito está vacío después de limpiar reservas expiradas
 if (empty($cart_products)) {
     echo json_encode([
-        'error' => 'Tu sesión de carrito ha expirado. Por favor, vuelve a agregar los productos al carrito.',
+        'success' => false,
+        'error' => 'empty_cart',
+        'message' => 'Tu sesión de carrito ha expirado. Por favor, vuelve a agregar los productos al carrito.',
         'expired_cart' => true
     ]);
     exit;
@@ -70,7 +87,9 @@ foreach ($cart_products as $item) {
                                 WHERE session_id='$session_id' AND producto_id=" . intval($item['codigo']) . " AND estado='reservado'");
         
         echo json_encode([
-            'error' => 'El producto "' . $item['nombre'] . '" ya no tiene stock suficiente. Se ha eliminado del carrito.',
+            'success' => false,
+            'error' => 'insufficient_stock',
+            'message' => 'El producto "' . $item['nombre'] . '" ya no tiene stock suficiente. Se ha eliminado del carrito.',
             'stock_issue' => true
         ]);
         exit;
@@ -85,16 +104,19 @@ foreach ($cart_products as $row) {
     $description[] = $row['nombre'] . " x" . $row['quantity'];
 }
 
-// CORRECCIÓN 1: Wompi requiere el monto en CENTAVOS (multiplicar por 100)
+// Wompi requiere el monto en CENTAVOS (multiplicar por 100)
 $amount_in_cents = intval(round($total * 100));
 $currency = "COP";
 $reference = "ORDER-" . uniqid();
 $cart_description = implode(", ", $description);
 
-// CORRECCIÓN 2: Usar endpoint de PRODUCCIÓN porque tienes claves de producción
-$wompi_url = "https://production.wompi.co/v1/payment_links"; // Endpoint de producción
+// ENDPOINT DE PRODUCCIÓN WOMPI
+$wompi_url = "https://production.wompi.co/v1/payment_links";
 
-// CORRECCIÓN 3: Estructurar correctamente los datos
+// URL de redirección - ajusta según tu dominio
+$success_url = "https://baf756ee4478.ngrok-free.app/tienda/src/views/success.php";
+
+// Estructurar correctamente los datos para Wompi
 $data = [
     "name" => "Compra Kongelados - " . $reference,
     "description" => $cart_description,
@@ -102,12 +124,11 @@ $data = [
     "collect_shipping" => false,
     "currency" => $currency,
     "amount_in_cents" => $amount_in_cents,
-    "redirect_url" => "https://baf756ee4478.ngrok-free.app/tienda/views/success.php",
-    // CORRECCIÓN 4: Usar formato ISO 8601 correcto para expires_at
+    "redirect_url" => $success_url,
     "expires_at" => date('Y-m-d\TH:i:s\Z', strtotime('+1 day')),
 ];
 
-// Log para debugging - ver qué datos se están enviando
+// Log para debugging
 error_log("Datos enviados a Wompi: " . json_encode($data));
 
 // Realizar la petición a la API de Wompi
@@ -128,7 +149,11 @@ $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
 if (curl_error($ch)) {
     error_log("cURL Error: " . curl_error($ch));
-    echo json_encode(['error' => 'Error de conexión con Wompi. Intenta nuevamente.']);
+    echo json_encode([
+        'success' => false,
+        'error' => 'connection_error',
+        'message' => 'Error de conexión con Wompi. Intenta nuevamente.'
+    ]);
     curl_close($ch);
     exit;
 }
@@ -143,7 +168,6 @@ if ($httpcode !== 201 && $httpcode !== 200) {
     $error_data = json_decode($response, true);
     $error_message = 'Error procesando el pago';
     
-    // CORRECCIÓN 5: Mejor manejo de errores específicos de Wompi
     if (isset($error_data['error'])) {
         if (isset($error_data['error']['type'])) {
             switch ($error_data['error']['type']) {
@@ -161,20 +185,18 @@ if ($httpcode !== 201 && $httpcode !== 200) {
             }
         }
         
-        // Mostrar mensajes específicos del error
         if (isset($error_data['error']['messages']) && is_array($error_data['error']['messages'])) {
             $error_message .= ': ' . implode(', ', $error_data['error']['messages']);
         }
         
-        // Para debugging - mostrar el error completo en logs
         error_log("Error completo de Wompi: " . json_encode($error_data));
     }
     
     echo json_encode([
-        'error' => $error_message,
-        'http_code' => $httpcode,
-        'details' => 'Verifica que uses las claves correctas de Wompi y que el monto sea válido.',
-        'debug_data' => $error_data // Solo para desarrollo - remover en producción
+        'success' => false,
+        'error' => 'payment_error',
+        'message' => $error_message,
+        'http_code' => $httpcode
     ]);
     exit;
 }
@@ -224,9 +246,10 @@ if (isset($responseData['data']['id'])) {
     exit;
 } else {
     echo json_encode([
-        'error' => 'No se pudo crear el enlace de pago',
-        'details' => 'La respuesta del servidor no contiene la información necesaria',
-        'response' => $responseData // Solo para debugging
+        'success' => false,
+        'error' => 'payment_link_creation_failed',
+        'message' => 'No se pudo crear el enlace de pago',
+        'details' => 'La respuesta del servidor no contiene la información necesaria'
     ]);
     exit;
 }

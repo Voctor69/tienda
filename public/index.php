@@ -272,10 +272,14 @@ if (isset($_GET['ajax_categoria']) && isset($_GET['categoria'])) {
         
 
         <symbol xmlns="http://www.w3.org/2000/svg" id="menu" viewBox="0 0 24 24"><path fill="currentColor" d="M2 6a1 1 0 0 1 1-1h18a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1m0 6.032a1 1 0 0 1 1-1h18a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1m1 5.033a1 1 0 1 0 0 2h18a1 1 0 0 0 0-2z"/></symbol>
-        <symbol xmlns="http://www.w3.org/2000/svg" id="link" viewBox="0 0 24 24"><path fill="currentColor" d="M12 19a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm5 0a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm0-4a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm-5 0a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm7-12h-1V2a1 1 0 0 0-2 0v1H8V2a1 1 0 0 0-2 0v1H5a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3Zm1 17a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9h16Zm0-11H4V6a1 1 0 0 1 1-1h1v1a1 1 0 0 0 2 0V5h8v1a1 1 0 0 0 2 0V5h1a1 1 0 0 1 1 1ZM7 15a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm0 4a1 1 0 1 0-1-1a1 1 0 0 0 1 1Z"/></symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="link" viewBox="0 0 24 24"><path fill="currentColor" d="M12 19a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm5 0a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm0-4a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm-5 0a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm7-12h-1V2a1 1 0 0 0-2 0v1H8V2a1 1 0 0 0-2 0v1H5a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3Zm1 17a1 1 0 0 1-.34 1.86a3.06 3.06 0 0 1-.75 1.15a3.19 3.19 0 0 1-1.15.75a5.61 5.61 0 0 1-1.86.34c-1 .05-1.37.06-4 .06s-3 0-4-.06a5.73 5.73 0 0 1-1.94-.3a3.27 3.27 0 0 1-1.1-.75a3 3 0 0 1-.74-1.15a5.54 5.54 0 0 1-.4-1.9c0-1-.06-1.37-.06-4s0-3 .06-4a5.54 5.54 0 0 1 .35-1.9A3 3 0 0 1 5 5a3.14 3.14 0 0 1 1.1-.8A5.73 5.73 0 0 1 8 3.86c1 0 1.37-.06 4-.06s3 0 4 .06a5.61 5.61 0 0 1 1.86.34a3.06 3.06 0 0 1 1.19.8a3.06 3.06 0 0 1 .75 1.1a5.61 5.61 0 0 1 .34 1.9c.05 1 .06 1.37.06 4s-.01 3-.06 4ZM12 6.87A5.13 5.13 0 1 0 17.14 12A5.12 5.12 0 0 0 12 6.87Zm0 8.46A3.33 3.33 0 1 1 15.33 12A3.33 3.33 0 0 1 12 15.33Z"/></symbol>
+        
+
         <symbol xmlns="http://www.w3.org/2000/svg" id="arrow-right" viewBox="0 0 24 24"><path fill="currentColor" d="M17.92 11.62a1 1 0 0 0-.21-.33l-5-5a1 1 0 0 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l5-5a1 1 0 0 0 .21-.33a1 1 0 0 0 0-.76Z"/></symbol>
         <symbol xmlns="http://www.w3.org/2000/svg" id="category" viewBox="0 0 24 24"><path fill="currentColor" d="M19 5.5h-6.28l-.32-1a3 3 0 0 0-2.84-2H5a3 3 0 0 0-3 3v13a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-10a3 3 0 0 0-3-3Zm1 13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-13a1 1 0 0 1 1-1h4.56a1 1 0 0 1 .95.68l.54 1.64a1 1 0 0 0 .95.68h7a1 1 0 0 1 1 1Z"/></symbol>
-        <symbol xmlns="http://www.w3.org/2000/svg" id="calendar" viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-2V3a1 1 0 0 0-2 0v1H9V3a1 1 0 0 0-2 0v1H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm1 15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7h16Zm0-9H4V7a1 1 0 0 1 1-1h2v1a1 1 0 0 0 2 0V6h6v1a1 1 0 0 0 2 0V6h2a1 1 0 0 1 1 1Z"/></symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="calendar" viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-2V3a1 1 0 0 0-2 0v1H9V3a1 1 0 0 0-2 0v1H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm1 15a1 1 0 0 1-.34 1.86a3.06 3.06 0 0 1-.75 1.15a3.19 3.19 0 0 1-1.15.75a5.61 5.61 0 0 1-1.86.34c-1 .05-1.37.06-4 .06s-3 0-4-.06a5.73 5.73 0 0 1-1.94-.3a3.27 3.27 0 0 1-1.1-.75a3 3 0 0 1-.74-1.15a5.54 5.54 0 0 1-.4-1.9c0-1-.06-1.37-.06-4s0-3 .06-4a5.54 5.54 0 0 1 .35-1.9A3 3 0 0 1 5 5a3.14 3.14 0 0 1 1.1-.8A5.73 5.73 0 0 1 8 3.86c1 0 1.37-.06 4-.06s3 0 4 .06a5.61 5.61 0 0 1 1.86.34a3.06 3.06 0 0 1 1.19.8a3.06 3.06 0 0 1 .75 1.1a5.61 5.61 0 0 1 .34 1.9c.05 1 .06 1.37.06 4s-.01 3-.06 4ZM12 6.87A5.13 5.13 0 1 0 17.14 12A5.12 5.12 0 0 0 12 6.87Zm0 8.46A3.33 3.33 0 1 1 15.33 12A3.33 3.33 0 0 1 12 15.33Z"/></symbol>
+        
+
         <symbol xmlns="http://www.w3.org/2000/svg" id="heart" viewBox="0 0 24 24"><path fill="currentColor" d="M20.16 4.61A6.27 6.27 0 0 0 12 4a6.27 6.27 0 0 0-8.16 9.48l7.45 7.45a1 1 0 0 0 1.42 0l7.45-7.45a6.27 6.27 0 0 0 0-8.87Zm-1.41 7.46L12 18.81l-6.75-6.74a4.28 4.28 0 0 1 3-7.3a4.25 4.25 0 0 1 3 1.25a1 1 0 0 0 1.42 0a4.27 4.27 0 0 1 6 6.05Z"/></symbol>
         <symbol xmlns="http://www.w3.org/2000/svg" id="plus" viewBox="0 0 24 24"><path fill="currentColor" d="M19 11h-6V5a1 1 0 0 0-2 0v6H5a1 1 0 0 0 0 2h6v6a1 1 0 0 0 2 0v-6h6a1 1 0 0 0 0-2Z"/></symbol>
         <symbol xmlns="http://www.w3.org/2000/svg" id="minus" viewBox="0 0 24 24"><path fill="currentColor" d="M19 11H5a1 1 0 0 0 0 2h14a1 1 0 0 0 0-2Z"/></symbol>
@@ -324,8 +328,8 @@ if (isset($_GET['ajax_categoria']) && isset($_GET['categoria'])) {
           <ul class="list-group mb-3" id="cart-list">
             <?php if (!empty($cart_products)): ?>
               <?php foreach ($cart_products as $item): ?>
-  <li class="list-group-item d-flex justify-content-between lh-sm align-items-center">
-    <div>
+          <li class="list-group-item d-flex justify-content-between lh-sm align-items-center">
+          <div>
       <h6 class="my-0"><?php echo htmlspecialchars($item['nombre']); ?></h6>
       <small class="text-body-secondary">Cantidad: <?php echo $item['quantity']; ?></small>
     </div>
@@ -338,50 +342,89 @@ if (isset($_GET['ajax_categoria']) && isset($_GET['categoria'])) {
       </button>
     </form>
   </li>
-<?php endforeach; ?>
-              <li class="list-group-item d-flex justify-content-between">
-                <span>Total</span>
-                <strong><?php echo number_format($cart_total, 2); ?> COP</strong>
-              </li>
-            <?php else: ?>
-              <li class="list-group-item text-center">El carrito está vacío.</li>
-            <?php endif; ?>
-          </ul>
+    <?php endforeach; ?>
+    <li class="list-group-item d-flex justify-content-between">
+      <span>Total</span>
+      <strong><?php echo number_format($cart_total, 2); ?> COP</strong>
+    </li>
+    <?php else: ?>
+    <li class="list-group-item text-center">El carrito está vacío.</li>
+    <?php endif; ?>
+    </ul>
+          <!-- Agrega las variables JS del carrito aquí -->
+<script>
+  // Variables JS para el proceso de pago
+  var carritoActual = <?php echo json_encode($cart_products); ?>;
+  var totalCarrito = <?php echo json_encode($cart_total); ?>;
+</script>
           <button onclick="procesarPago()" class="w-100 btn btn-primary btn-lg" id="btn-pagar">Proceder con el pago</button>
 
 <script>
 function procesarPago() {
-    // Cambiar texto del botón
-    document.getElementById('btn-pagar').disabled = true;
-    document.getElementById('btn-pagar').innerText = 'Procesando...';
+    console.log('Iniciando proceso de pago...');
     
-    fetch('tienda/src/controllers/checkout.php', {
-        method: 'POST'
+    // Cambiar texto del botón
+    const btnPagar = document.getElementById('btn-pagar');
+    btnPagar.disabled = true;
+    btnPagar.innerText = 'Procesando...';
+    
+const datosCarrito = {
+        // Pon aquí los datos que necesitas enviar al checkout
+        productos: carritoActual, // o como tengas los datos del carrito
+        total: totalCarrito // o como calcules el total
+    };
+
+    // CORRECCIÓN: Ruta absoluta considerando el .htaccess y la estructura real
+    fetch('/tienda/src/controllers/checkout.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('Respuesta recibida:', response.status);
+        
+        // Verificar si la respuesta es JSON
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+            return response.json();
+        } else {
+            // Si no es JSON, probablemente es un error del servidor
+            return response.text().then(text => {
+                console.error('Respuesta no-JSON del servidor:', text);
+                throw new Error(`Error del servidor (${response.status}): ${text}`);
+            });
+        }
+    })
     .then(data => {
+        console.log('Datos recibidos:', data);
+        
         if (data.success) {
             // Redirigir a la página de pago de Wompi
+            console.log('Redirigiendo to:', data.payment_url);
             window.location.href = data.payment_url;
         } else {
             if (data.error === 'auth_required') {
                 // Redirige al login si no está autenticado
-                window.location.href = 'tienda/src/controllers/acceso.php';
+                console.log('Autenticación requerida, redirigiendo...');
+                window.location.href = '/tienda/acceso';
             } else {
-                alert('Error: ' + data.error);
-                // Restaurar botón
-                document.getElementById('btn-pagar').disabled = false;
-            document.getElementById('btn-pagar').innerText = 'Proceder con el pago';
+                alert('Error: ' + (data.message || data.error));
+                restaurarBoton();
+            }
         }
-      }
     })
     .catch(error => {
-        console.error('Error:', error);
-        alert('Error de conexión. Intenta nuevamente.');
-        // Restaurar botón
-        document.getElementById('btn-pagar').disabled = false;
-        document.getElementById('btn-pagar').innerText = 'Proceder con el pago';
+        console.error('Error completo:', error);
+        alert('Error de conexión: ' + error.message);
+        restaurarBoton();
     });
+}
+
+function restaurarBoton() {
+    const btnPagar = document.getElementById('btn-pagar');
+    btnPagar.disabled = false;
+    btnPagar.innerText = 'Proceder con el pago';
 }
 </script>
         </div>
@@ -458,7 +501,7 @@ function procesarPago() {
           <div class="col-sm-8 col-lg-2 d-flex gap-5 align-items-center justify-content-center justify-content-sm-end">
             <ul class="d-flex justify-content-end list-unstyled m-0">
               <li>
-                <a href="#" class="p-2 mx-1">
+                <a href="/tienda/usuario.php" class="p-2 mx-1">
                   <svg width="24" height="24"><use xlink:href="#user"></use></svg>
                 </a>
               </li>
@@ -952,7 +995,8 @@ $(function() {
   // Click en producto: redirige a la página del producto
   $list.on('click', 'div', function() {
     var id = $(this).data('id');
-    window.location.href = 'producto.php?id=' + id;
+    // Redirige a acceso limpio en JS
+    window.location.href = '/tienda/producto?id=' + id;
   });
   // Oculta la lista si el input pierde foco
   $input.on('blur', function() {

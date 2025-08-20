@@ -1,8 +1,27 @@
 # tienda/.htaccess
 RewriteEngine On
 
+# Redirigir acceso.php al controlador real
+RewriteRule ^acceso.php$ src/controllers/acceso.php [L]
+RewriteRule ^usuario.php$ src/controllers/usuario.php [L]
+RewriteRule ^producto.php$ src/controllers/producto.php [L]
+RewriteRule ^checkout.php$ src/controllers/checkout.php [L]
+# ...agrega aquí más reglas si tienes más controladores...
+
 # Redirigir assets directamente
 RewriteRule ^assets/(.*)$ public/assets/$1 [L]
+
+# Redirigir solo la raíz /tienda/ a public/index.php
+RewriteRule ^$ public/index.php [L]
+
+# No redirigir si el archivo o carpeta existe
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# No redirigir si la URL termina en .php
+RewriteCond %{REQUEST_URI} \.php$ [NC]
+RewriteRule ^ - [L]
 
 # Redirigir todo lo demás a public/
 RewriteRule ^(.*)$ public/$1 [L]

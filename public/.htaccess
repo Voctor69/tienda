@@ -1,7 +1,0 @@
-# public/.htaccess
-RewriteEngine On
-
-# Si no es un archivo o carpeta, usar index.php
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php [QSA,L]
