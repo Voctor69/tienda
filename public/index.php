@@ -407,7 +407,7 @@ const datosCarrito = {
             if (data.error === 'auth_required') {
                 // Redirige al login si no está autenticado
                 console.log('Autenticación requerida, redirigiendo...');
-                window.location.href = '/tienda/acceso';
+                window.location.href = '/tienda/acceso.php';
             } else {
                 alert('Error: ' + (data.message || data.error));
                 restaurarBoton();
